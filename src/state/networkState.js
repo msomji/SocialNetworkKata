@@ -41,18 +41,37 @@ const getTimeLine = () => {
 
 }
 const getTimeLineByUsername = username => state.posts.filter(p => p.author == username)
+
+const follow = (username) => {
+  state = {
+    ...state,
+    currentUser: {
+      ...state.currentUser,
+      follows: [
+        ...state.currentUser.follows,
+        username
+      ]
+    }
+  }
+
+}
+
+
 const currentUser = () => state.currentUser
+
 
 const _resetState = () => {
   state = INITIAL_STATE
 }
 const _getState = () => state
 
+
 module.exports = {
   register,
   login,
   publish,
   getTimeLine,
+  follow,
   getTimeLineByUsername,
   currentUser,
   _getState,

@@ -1,4 +1,5 @@
 const Post = require('../../src/models/post')
+const User = require('../../src/models/user')
 let networkState = require('../../src/state/networkState')
 
 const INITIAL_STATE = {
@@ -81,6 +82,21 @@ describe('NetworkState', () => {
 
       expect(networkState.getTimeLineByUsername(username)).toEqual([post])
     })
+  })
+  describe('follow', () => {
+    it("should update current users's follow list", () => {
+      username = 'username'
+      usernameTofollow = 'usernameTofollow'
+      userObject = new User(username)
+
+      networkState.register(userObject)
+      networkState.login(username)
+      
+      networkState.follow('usernameTofollow')
+      
+      expect(networkState._getState().currentUser.follows).toEqual([usernameTofollow])
+    })
+    it("should update current users's follow list in all users array")
   })
 
 })

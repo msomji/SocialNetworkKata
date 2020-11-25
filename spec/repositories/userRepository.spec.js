@@ -29,4 +29,11 @@ describe('User Repositories', () => {
     stateSpy.and.returnValue(currentUser)
     expect (userRepositoy.currentUser()).toEqual(currentUser)
   })
+
+  it('should follow user', () => {
+    let username = 'username'
+    stateSpy = spyOn(networkState, 'follow')
+    userRepositoy.follow(username)
+    expect(stateSpy).toHaveBeenCalledOnceWith(username)
+  })
 })
