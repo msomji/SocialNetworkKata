@@ -14,15 +14,41 @@ describe('NetworkState', () => {
     expect(networkState._getState()).toEqual(INITIAL_STATE)
   })
 
-  it('register should return registered user', () => {
-    let userObject = {}
-    
-    expect(networkState.register(userObject)).toEqual(userObject)
-  })
-  it('register should add Object to users array', () => {
-    let userObject = {}
-    networkState.register(userObject)
+  describe('register', () => {
 
-    expect(networkState._getState().users).toEqual([userObject])
+    it('should return registered user', () => {
+      let userObject = {}
+      
+      expect(networkState.register(userObject)).toEqual(userObject)
+    })
+    it('should add Object to users array', () => {
+      let userObject = {}
+      networkState.register(userObject)
+      
+      expect(networkState._getState().users).toEqual([userObject])
+    })
   })
+  describe('login', () => {
+    it('should return provided usernames associated userObject', () => {
+      username = 'username'
+      userObject = {
+        name: username
+      }
+      networkState.register(userObject)
+      
+      expect(networkState.login(username)).toEqual(userObject)
+    })
+    it('should set currentUser to logged in user object', () => {
+      username = 'username'
+      userObject = {
+        name: username
+      }
+      networkState.register(userObject)
+      networkState.login(username)
+
+      expect(networkState.currentUser()).toEqual(userObject)
+    })
+  })
+
+
 })

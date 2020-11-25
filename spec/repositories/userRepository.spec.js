@@ -11,4 +11,14 @@ describe('User Repositories', () => {
     expect(userRepositoy.registerUser(userObject)).toEqual(userObject)
     expect(stateSpy).toHaveBeenCalledOnceWith(userObject)
   })
+
+  it('should login user to social network', () => {
+    username = "username"
+    userObject = {name: "some user"}
+    
+    stateSpy = spyOn(networkState, 'login')
+    stateSpy.and.returnValue(userObject)
+
+    expect(userRepositoy.login(username)).toEqual(userObject)
+  })
 })
