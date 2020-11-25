@@ -1,6 +1,27 @@
 Social Networking Kata
 ----------------------
 
+- Install dependencies: `npm install`
+- Run tests: `npm run test`
+- Watch and run tests: `npm run watch`
+
+This implmentation of the socialNetwork currently has 3 layers:
+
+1. Service (UserService and PostService)
+   - Services delegate tasks and return formatted messages back to the caller
+
+2. Repository (postRepository, userRepository)
+   - layer between the core logic and the NetworkState (which would be a database in a real example)
+   - currently just a pure pass through
+
+3. NetworkState (this is similar to client-side state object in the flux framework)
+   - This is where all the system state is stored, each call updates or reads from the state object. 
+
+**N.B** Unfortunately I didnt get to implement the socialNetwork.js where all the services would come togather and allow a user to go through these flows.
+
+
+
+
 Implement the core **domain logic** for a social networking application (similar to Twitter) satisfying the features below.
 
 ``` {.sourceCode .gherkin}
