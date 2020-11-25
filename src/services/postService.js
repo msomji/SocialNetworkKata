@@ -28,12 +28,23 @@ const getTimeLineByUsername = (username) =>
 
 // getWall 
 const getWall = () => {
+  let usersFollowing = userRepository.getFollowing()
+  let currentTimeLine = postRepository.getTimeLine()
+  let followersTimeLine = usersFollowing.map(username => postRepository.getTimeLineByUsername(username)).flat()
   
+  return [...currentTimeLine, ...followersTimeLine]
+          .sort((a,b) => b.timeStamp - a.timeStamp)
+                        .map(post => {
+                          currentTime = new Date()
+                          timeElapsed = new Date(currentTime - post.timeStamp).getMinutes()
+                          return `${post.author} - ${post.content} (${timeElapsed} minutes ago)`
+                        })
+
 }
 
 module.exports = {
   publish,
   getTimeLine,
-  getTimeLineByUsername
-
+  getTimeLineByUsername,
+  getWall,
 }
