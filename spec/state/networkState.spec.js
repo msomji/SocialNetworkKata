@@ -1,5 +1,6 @@
 const Post = require('../../src/models/post')
 const User = require('../../src/models/user')
+const { currentUser } = require('../../src/state/networkState')
 let networkState = require('../../src/state/networkState')
 
 const INITIAL_STATE = {
@@ -20,13 +21,13 @@ describe('NetworkState', () => {
 
     it('should return registered user', () => {
       let userObject = {}
-      
+
       expect(networkState.register(userObject)).toEqual(userObject)
     })
     it('should add Object to users array', () => {
       let userObject = {}
       networkState.register(userObject)
-      
+
       expect(networkState._getState().users).toEqual([userObject])
     })
   })
@@ -37,7 +38,7 @@ describe('NetworkState', () => {
         name: username
       }
       networkState.register(userObject)
-      
+
       expect(networkState.login(username)).toEqual(userObject)
     })
     it('should set currentUser to logged in user object', () => {
@@ -76,7 +77,7 @@ describe('NetworkState', () => {
   describe('any user timeline', () => {
     it('should get timeline', () => {
       username = 'anotherUsername'
-     
+
       post = new Post(username, "this is content")
       networkState.publish(post)
 
@@ -91,12 +92,22 @@ describe('NetworkState', () => {
 
       networkState.register(userObject)
       networkState.login(username)
-      
-      networkState.follow('usernameTofollow')
-      
-      expect(networkState._getState().currentUser.follows).toEqual([usernameTofollow])
-    })
-    it("should update current users's follow list in all users array")
-  })
 
+      networkState.follow('usernameTofollow')
+
+      expect(networkState.getFollowing()).toEqual([usernameTofollow])
+    })
+    it("should update current users's follow list in all users array", () => {
+      username = 'username'
+      usernameTofollow = 'usernameTofollow'
+      userObject = new User(username)
+
+      networkState.register(userObject)
+      networkState.login(username)
+
+      networkState.follow('usernameTofollow')
+      user = networkState._getState().users.filter(u => u.name == username)[0]
+      expect(user.follows).toEqual([usernameTofollow])
+    })
+  })
 })

@@ -27,7 +27,9 @@ const getTimeLineByUsername = (username) =>
                     })
 
 // getWall 
-
+const getWall = () => {
+  
+}
 
 module.exports = {
   publish,
