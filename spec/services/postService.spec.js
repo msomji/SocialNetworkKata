@@ -9,7 +9,21 @@ describe('postService', () => {
 
     expect(postService.publish(post)).toEqual(post)
   })
+  it('should be able to get current user timeline', () => {
+    let timeLine = []
+    let postRepoSpy = spyOn(postRepositoy, 'getTimeLine')
+    postRepoSpy.and.returnValue(timeLine)
+
+    expect(postService.getTimeLine()).toEqual(timeLine)
+  })
+  it('should be able to get another users\' timeline', () => {
+    let timeLine = []
+    let username = 'username'
+    let postRepoSpy = spyOn(postRepositoy, 'getTimeLineByUsername')
+    postRepoSpy.and.returnValue(timeLine)
+
+    expect(postService.getTimeLineByUsername(username)).toEqual(timeLine)
+    expect(postRepoSpy).toHaveBeenCalledOnceWith(username)
+  })
   it('should be able to get current user\' wall')
-  it('should be able to get current user timeline')
-  it('should be able to get another users\' timeline')
 })

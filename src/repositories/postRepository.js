@@ -1,7 +1,11 @@
 
 
 const publish = () => {}
+const getTimeLine = () => {}
+const getTimeLineByUsername = () => {}
 
 module.exports = {
-  publish
+  publish,
+  getTimeLine,
+  getTimeLineByUsername
 }
