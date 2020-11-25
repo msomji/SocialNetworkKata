@@ -1,0 +1,19 @@
+{
+  "name": "socialnetworkingkata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "socialNetwork.js",
+  "scripts": {
+    "test": "jasmine",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "test": "*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.6.3",
+    "npm-watch": "^0.7.0"
+  }
+}
