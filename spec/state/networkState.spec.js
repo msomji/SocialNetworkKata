@@ -1,3 +1,4 @@
+const Post = require('../../src/models/post')
 let networkState = require('../../src/state/networkState')
 
 const INITIAL_STATE = {
@@ -49,6 +50,37 @@ describe('NetworkState', () => {
       expect(networkState.currentUser()).toEqual(userObject)
     })
   })
+  describe('publish', () => {
+    it('should publish a post Object', () => {
+      post = {}
+      expect(networkState.publish(post)).toEqual(post)
+      expect(networkState._getState().posts).toEqual([post])
+    })
+  })
 
+  describe('current user timeline', () => {
+    it('should get timeline', () => {
+      username = 'username'
+      userObject = {
+        name: username
+      }
+      networkState.register(userObject)
+      networkState.login(username)
+      post = new Post(username, "this is content")
+      networkState.publish(post)
+
+      expect(networkState.getTimeLine()).toEqual([post])
+    })
+  })
+  describe('any user timeline', () => {
+    it('should get timeline', () => {
+      username = 'anotherUsername'
+     
+      post = new Post(username, "this is content")
+      networkState.publish(post)
+
+      expect(networkState.getTimeLineByUsername(username)).toEqual([post])
+    })
+  })
 
 })

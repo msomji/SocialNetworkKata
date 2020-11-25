@@ -27,14 +27,20 @@ const login = username => {
 }
 
 const publish = post => {
-  
+  state = {
+    ...state,
+    posts: [
+      ...state.posts,
+      post
+    ]
+  }
+  return post
 }
-const getTimeLine = post => {
+const getTimeLine = () => {
+  return state.posts.filter(p => p.author == state.currentUser.name)
 
 }
-const getTimeLineByUsername = post => {
-
-}
+const getTimeLineByUsername = username => state.posts.filter(p => p.author == username)
 const currentUser = () => state.currentUser
 
 const _resetState = () => {
