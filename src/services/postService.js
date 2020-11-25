@@ -1,6 +1,12 @@
+const Post = require('../models/post')
 let postRepository = require('../repositories/postRepository')
+const userRepository = require('../repositories/userRepository')
 
-const publish = postObject => postRepository.publish(postObject)
+const publish = postContent => {
+  let currentuser = userRepository.currentUser()
+  let postObject = new Post(currentuser.name, postContent)
+  return postRepository.publish(postObject)
+}
 
 const getTimeLine = () =>
  postRepository.getTimeLine()

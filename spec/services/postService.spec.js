@@ -1,11 +1,17 @@
 let postService = require('../../src/services/postService')
 let postRepositoy = require('../../src/repositories/postRepository')
+let userRepository = require('../../src/repositories/userRepository')
 const Post = require('../../src/models/post')
+const User = require('../../src/models/user')
 
 describe('postService', () => {
   it('should be able to publish a post', () => {
     let post = {}
+    let username = 'username'
+    let userRepoSpy = spyOn(userRepository, 'currentUser')
     let postRepoSpy = spyOn(postRepositoy, 'publish')
+    userRepoSpy.and.returnValue(new User(username))
+    post = new Post(username, "content")
     postRepoSpy.and.returnValue(post)
 
     expect(postService.publish(post)).toEqual(post)

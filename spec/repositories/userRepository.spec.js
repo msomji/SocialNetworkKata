@@ -1,4 +1,5 @@
 let userRepositoy = require('../../src/repositories/userRepository')
+const { currentUser } = require('../../src/state/networkState')
 let networkState = require('../../src/state/networkState')
 
 describe('User Repositories', () => {
@@ -20,5 +21,12 @@ describe('User Repositories', () => {
     stateSpy.and.returnValue(userObject)
 
     expect(userRepositoy.login(username)).toEqual(userObject)
+  })
+
+  it('should return current loggedin user', () => {
+    let currentUser = 'currentUser'
+    stateSpy = spyOn(networkState, 'currentUser')
+    stateSpy.and.returnValue(currentUser)
+    expect (userRepositoy.currentUser()).toEqual(currentUser)
   })
 })

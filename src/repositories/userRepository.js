@@ -4,7 +4,10 @@ const registerUser = userObject => networkState.register(userObject)
 
 const login = username => networkState.login(username)
 
+const currentUser = () => networkState.currentUser()
+
 module.exports =  {
   registerUser,
-  login
+  login,
+  currentUser
 }
