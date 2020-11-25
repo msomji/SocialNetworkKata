@@ -1,4 +1,4 @@
-let userRepository = require('../repository/userRepository');
+let userRepository = require('../repositories/userRepository');
 
 const register = userObject => userRepository.registerUser(userObject)
 

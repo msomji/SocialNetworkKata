@@ -1,4 +1,4 @@
-const userRepository = require('../../src/repository/userRepository')
+const userRepository = require('../../src/repositories/userRepository')
 let userService = require('../../src/services/userService')
 
 describe('UserService', () => {
