@@ -25,6 +25,16 @@ const login = username => {
   }
   return state.currentUser
 }
+
+const publish = post => {
+  
+}
+const getTimeLine = post => {
+
+}
+const getTimeLineByUsername = post => {
+
+}
 const currentUser = () => state.currentUser
 
 const _resetState = () => {
@@ -35,6 +45,9 @@ const _getState = () => state
 module.exports = {
   register,
   login,
+  publish,
+  getTimeLine,
+  getTimeLineByUsername,
   currentUser,
   _getState,
   _resetState,
